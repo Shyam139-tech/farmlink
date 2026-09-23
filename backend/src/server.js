@@ -11,7 +11,7 @@ import { Pool } from 'pg';
 const app = express();
 const port = process.env.PORT || 5000;
 const secret = process.env.JWT_SECRET || 'farmlink-local-demo-secret';
-const corsOrigins = (process.env.CORS_ORIGIN || 'https://frontend-snowy-iota-47.vercel.app,http://localhost:5173,http://localhost:5174').split(',').map(origin => origin.trim()).filter(Boolean);
+const corsOrigins = (process.env.CORS_ORIGIN || 'https://farmlink-sih.vercel.app,http://localhost:5173,http://localhost:5174').split(',').map(origin => origin.trim()).filter(Boolean);
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({ origin: (origin, callback) => { if (!origin || corsOrigins.includes(origin)) return callback(null, true); return callback(new Error('Origin is not allowed by CORS')); }, credentials: true }));
 app.use(express.json());

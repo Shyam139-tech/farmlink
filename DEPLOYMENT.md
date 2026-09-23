@@ -51,7 +51,7 @@ with Git Credential Manager; never put a password in a remote URL.
 
    ```text
    JWT_SECRET=<long random value>
-   CORS_ORIGIN=https://YOUR-FARMLINK.vercel.app
+   CORS_ORIGIN=https://farmlink-sih.vercel.app
    ```
 
    Render supplies `PORT`; the backend binds to `0.0.0.0`.
@@ -80,7 +80,8 @@ The response should include `status: "ok"` and
    ```
 
 5. Deploy. `frontend/vercel.json` keeps React Router routes working on refresh.
-6. Copy the Vercel URL and update Render's `CORS_ORIGIN` to that exact origin,
+6. The public Vercel URL is `https://farmlink-sih.vercel.app`. Keep Render's
+   `CORS_ORIGIN` set to that exact origin,
    without a trailing slash or path. Redeploy the backend after changing it.
 
 The jury URL is the Vercel URL. No custom domain is needed.
@@ -113,7 +114,7 @@ Render backend:
 ```text
 NODE_ENV=production
 JWT_SECRET=<secret>
-CORS_ORIGIN=https://YOUR-FARMLINK.vercel.app
+CORS_ORIGIN=https://farmlink-sih.vercel.app
 ```
 
 Vercel frontend:
