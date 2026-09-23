@@ -1,0 +1,16 @@
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './styles.css';
+import './featureStyles.css';
+import './phoneStyles.css';
+import './juryStyles.css';
+import './juryInnovative.css';
+import './juryCombined.css';
+import './juryBarOverride.css';
+import './mapHeightOverride.css';
+import './prototypeBranding.css';
+import './pickupStyles.css';
+import './pickupError.css';
+createRoot(document.getElementById('root')).render(<React.StrictMode><BrowserRouter><App /></BrowserRouter></React.StrictMode>);

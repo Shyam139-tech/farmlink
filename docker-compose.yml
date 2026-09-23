@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment: { POSTGRES_DB: farmlink, POSTGRES_USER: postgres, POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-password}' }
+    ports: ['5432:5432']
+    volumes: ['./database:/docker-entrypoint-initdb.d']
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports: ['6379:6379']
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment: { PORT: 5000, DATABASE_URL: 'postgresql://postgres:${POSTGRES_PASSWORD:-password}@postgres:5432/farmlink', JWT_SECRET: '${JWT_SECRET:-change_me}', CORS_ORIGIN: 'http://localhost:5173', DEMO_MODE: 'false' }
+    ports: ['5001:5000']
+    depends_on: [postgres]
+  ai-service:
+    build: ./ai-service
+    restart: unless-stopped
+    ports: ['8000:8000']
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:5001/api
+    ports: ['5173:80']
+    restart: unless-stopped
+    depends_on: [backend]
